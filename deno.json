@@ -1,0 +1,11 @@
+{
+  "tasks": {
+    "dev": "deno run --watch main.ts",
+    "start": "deno run --allow-all main.ts"
+  },
+  "imports": {
+    "@openzeppelin/contracts": "npm:@openzeppelin/contracts@^5.3.0",
+    "@std/assert": "jsr:@std/assert@1",
+    "viem": "npm:viem@^2.29.1"
+  }
+}

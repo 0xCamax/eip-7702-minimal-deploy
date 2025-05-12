@@ -1,10 +1,23 @@
-import { abi, contractAddress } from './contract.ts';
+import { abi } from './contract.ts';
 import { createWalletClient, http } from 'viem';
-import { mainnet } from 'viem/chains';
+import { mainnet, sepolia } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
+
+const contractAddressMainnet = '0x3cf77F1aaF5E07E3422199FECFF11602c47BcF7A';
+const contractAddressSepolia = '0x3f56469c5235cD699f767776B45801Ce70b0B89C';
 
 async function main() {
 	const privateKey = prompt('Enter your private key: ') as `0x${string}`;
+	const chain = prompt('Enter the chain(mainnet/sepolia): ');
+	let chainId;
+	if (!chain || (chain !== "mainnet" && chain !== "sepolia")) {
+		console.error('Options are mainnet or sepolia');
+		return;
+	} else if (chain === "mainnet") {
+		chainId = mainnet;
+	} else if (chain === "sepolia") {
+		chainId = sepolia;
+	}
 	const implementationAddress = prompt(
 		'Enter the contract address: '
 	) as `0x${string}`;
@@ -18,12 +31,12 @@ async function main() {
 
 	const walletClient = createWalletClient({
 		account: eoa,
-		chain: mainnet,
+		chain: chainId,
 		transport: http(),
 	});
 
 	const authorization = await walletClient.signAuthorization({
-		contractAddress,
+		contractAddress: (chainId == mainnet) ? contractAddressMainnet : contractAddressSepolia,
 		executor: 'self',
 	});
 

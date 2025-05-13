@@ -3,7 +3,7 @@ import { createWalletClient, http } from 'viem';
 import { mainnet, sepolia } from 'viem/chains';
 import { privateKeyToAccount } from 'viem/accounts';
 
-const contractAddressMainnet = '0x3cf77F1aaF5E07E3422199FECFF11602c47BcF7A';
+const contractAddressMainnet = '0xA8B8D9dFD977Ef3b7D9E6048FC503E038b95073C';
 const contractAddressSepolia = '0x3f56469c5235cD699f767776B45801Ce70b0B89C';
 
 async function main() {
